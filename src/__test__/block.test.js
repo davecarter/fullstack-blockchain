@@ -1,4 +1,5 @@
 import { Block } from "../FES";
+import { cryptoHash } from "../FES/CryptoHash";
 
 describe("Creates the Genesis Block", () => {
   const data = "This is the GENESIS block";
@@ -41,5 +42,12 @@ describe("Mines a Block", () => {
 
   it("sets a timestamp", () => {
     expect(minedBlock.timestamp).not.toEqual(undefined);
+  });
+
+  it("creates a SHA-256 `hash` based on the proper inputs", () => {
+    const { difficulty, hash } = lastBlock;
+    expect(minedBlock.hash).toEqual(
+      cryptoHash(data, difficulty, hash, minedBlock.timestamp)
+    );
   });
 });
