@@ -21,6 +21,10 @@ class Block {
 
     return new this({ data, difficulty, hash, lastHash, timestamp });
   }
+
+  static mineBlock({ lastBlock, data }) {
+    return new this({ timestamp: Date.now(), lastHash: lastBlock.hash, data });
+  }
 }
 
 export { Block };
