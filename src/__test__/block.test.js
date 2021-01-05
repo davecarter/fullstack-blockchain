@@ -1,5 +1,5 @@
 import { Block } from "../FES"
-import { cryptoHash } from "../FES/CryptoHash"
+import { cryptoHash } from "../FES/cryptoHash"
 
 describe("Creates the Genesis Block", () => {
   const data = "This is the GENESIS block"

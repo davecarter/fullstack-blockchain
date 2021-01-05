@@ -1,4 +1,4 @@
-import { cryptoHash } from "../FES/CryptoHash"
+import { cryptoHash } from "../FES/cryptoHash"
 import hashed from "./fixtures/crypto.json"
 
 describe("Adds SHA256 encryption", () => {
