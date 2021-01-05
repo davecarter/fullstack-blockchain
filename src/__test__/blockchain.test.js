@@ -27,7 +27,7 @@ describe("a Blockchain is succesfully build", () => {
     describe("when the chain does not starts with a Genesis block", () => {
       it("should return false", () => {
         blockchain.chain[0] = { data: "invalid genesis block" }
-        expect(Blockchain.isValidChain()).toBe(false)
+        expect(Blockchain.isValidChain(blockchain.chain)).toBe(false)
       })
     })
 
@@ -50,17 +50,13 @@ describe("a Blockchain is succesfully build", () => {
 
           blockchain.chain[2].data = "broken-data"
 
-          expect(Blockchain.isValidChain()).toBe(false)
+          expect(Blockchain.isValidChain(blockchain.chain)).toBe(false)
         })
       })
 
       describe("and the chain does not contains any invalid Blocks", () => {
-        it("returns true", () => {
-          blockchain.addBlock({ data: "one" })
-          blockchain.addBlock({ data: "two" })
-          blockchain.addBlock({ data: "three" })
-
-          expect(Blockchain.isValidChain()).toBe(true)
+        it("should return true", () => {
+          expect(Blockchain.isValidChain(blockchain.chain)).toBe(true)
         })
       })
     })
