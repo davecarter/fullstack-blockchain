@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const HomePage = () => (
   <header className="homePage-Header">
@@ -11,6 +11,6 @@ const HomePage = () => (
       @d4vecarter
     </a>
   </header>
-);
+)
 
-export { HomePage };
+export { HomePage }
