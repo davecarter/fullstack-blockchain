@@ -1,4 +1,4 @@
 import { Block } from "./Block"
-import { CryptoHash } from "./CryptoHash"
+import { cryptoHash } from "./cryptoHash"
 
-export { Block, CryptoHash }
+export { Block, cryptoHash }

@@ -1,5 +1,5 @@
 import { config } from "./config"
-import { cryptoHash } from "./CryptoHash"
+import { cryptoHash } from "./cryptoHash"
 
 class Block {
   constructor({ data, difficulty, hash, lastHash, timestamp }) {
