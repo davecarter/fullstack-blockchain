@@ -4,8 +4,7 @@ import { cryptoHash } from '../FES/CryptoHash'
 describe('Creates the Genesis Block', () => {
   const data = 'This is the GENESIS block'
   const hash = '0000000000'
-  const lastHash = '0000'
-  const timestamp = 'Initial date'
+  const lastHash = '0000000000'
 
   const genesisBlock = Block.genesis()
 
@@ -17,7 +16,6 @@ describe('Creates the Genesis Block', () => {
     expect(genesisBlock.data).toEqual(data)
     expect(genesisBlock.hash).toEqual(hash)
     expect(genesisBlock.lastHash).toEqual(lastHash)
-    expect(genesisBlock.timestamp).toEqual(timestamp)
   })
 })
 

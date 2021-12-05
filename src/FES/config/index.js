@@ -6,8 +6,8 @@ const LOCALE = {
 const GENESIS_BLOCK = {
   data: 'This is the GENESIS block',
   hash: '0000000000',
-  lastHash: '0000',
-  timestamp: 'Initial date',
+  lastHash: '0000000000',
+  timestamp: Date.now(),
 }
 
 const config = {
