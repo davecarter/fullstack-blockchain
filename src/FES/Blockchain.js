@@ -15,6 +15,21 @@ export class Blockchain {
     this._chain.push(newBlock)
   }
 
+  replaceChain(chain) {
+    if (chain.length <= this._chain.length) {
+      console.warn('BlockChain length must be longer')
+      return
+    }
+
+    if (!Blockchain.isValidChain(chain)) {
+      console.error('BlockChain must be valid')
+      return
+    }
+
+    console.log('Replacing BlockChain')
+    this._chain = chain
+  }
+
   static isValidChain(blockchain) {
     // genesis block validation
     if (JSON.stringify(blockchain[0]) !== JSON.stringify(Block.genesis())) return false
