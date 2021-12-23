@@ -1,5 +1,5 @@
 import { Block } from './Block'
-import { cryptoHash } from './CryptoHash'
+import { CryptoHash } from './CryptoHash'
 
 export class Blockchain {
   constructor() {
@@ -36,11 +36,11 @@ export class Blockchain {
 
     // rest of the blockchain validation
     for (let i = 1; i < blockchain.length; i++) {
-      const { data, hash, lastHash, timestamp } = blockchain[i]
+      const { data, hash, lastHash, timestamp, nonce, difficulty } = blockchain[i]
       const actualLastHash = blockchain[i - 1].hash
       if (lastHash !== actualLastHash) return false
 
-      const validatedHash = cryptoHash(data, lastHash, timestamp)
+      const validatedHash = CryptoHash(data, lastHash, timestamp, nonce, difficulty)
       if (hash !== validatedHash) return false
     }
 
