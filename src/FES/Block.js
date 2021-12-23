@@ -1,42 +1,63 @@
 import { config } from './config'
-import { cryptoHash } from './CryptoHash'
+import { CryptoHash } from './CryptoHash'
 import { GenericBlockError } from './Errors/GenericBlockError'
 
 class Block {
-  constructor({ data, hash, lastHash, timestamp }) {
+  constructor({ data, difficulty, hash, lastHash, nonce, timestamp }) {
     this.data = data
+    this.difficulty = difficulty
     this.hash = hash
     this.lastHash = lastHash
+    this.nonce = nonce
     this.timestamp = timestamp
   }
 
-  static validate({ data, hash, lastHash, timestamp }) {
-    if (!data || !hash || !lastHash || !timestamp)
+  static validate({ data, difficulty, hash, lastHash, nonce, timestamp }) {
+    if (!data)
       throw GenericBlockError.create(
-        `[Block.validate] data(${data}) hash(${hash}) lastHash(${lastHash}) timestamp(${timestamp})`,
+        `[Block.validate] data(${data})
+          difficulty(${difficulty})
+          hash(${hash})
+          lastHash(${lastHash})
+          nonce(${nonce})
+          timestamp(${timestamp})`,
       )
   }
 
-  static create({ data, hash, lastHash, timestamp }) {
-    Block.validate({ data, hash, lastHash, timestamp })
-    return new Block({ data, hash, lastHash, timestamp })
+  static create({ data, difficulty, hash, lastHash, nonce, timestamp }) {
+    Block.validate({ data, difficulty, hash, lastHash, nonce, timestamp })
+    return new Block({ data, difficulty, hash, lastHash, nonce, timestamp })
   }
 
   static genesis() {
     this._config = config
-    const { data, hash, lastHash, timestamp } = this._config.GENESIS_BLOCK
+    const { data, difficulty, hash, lastHash, nonce, timestamp } = this._config.GENESIS_BLOCK
 
-    return Block.create({ data, hash, lastHash, timestamp })
+    return Block.create({ data, difficulty, hash, lastHash, nonce, timestamp })
   }
 
   static mineBlock({ lastBlock, data }) {
-    const timestamp = Date.now()
+    let nonce = 0
+    let timestamp
+    const { difficulty } = lastBlock
     const lastHash = lastBlock.hash
+
+    const currentDifficulty = '0'.repeat(difficulty)
+    let hash
+
+    do {
+      nonce++
+      timestamp = Date.now()
+      hash = CryptoHash(data, lastHash, timestamp, nonce, difficulty)
+      console.log('HASH', hash)
+    } while (!hash.startsWith(currentDifficulty))
 
     return Block.create({
       data,
-      hash: cryptoHash(data, lastHash, timestamp),
+      difficulty,
+      hash,
       lastHash,
+      nonce,
       timestamp,
     })
   }

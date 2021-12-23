@@ -5,8 +5,10 @@ const LOCALE = {
 
 const GENESIS_BLOCK = {
   data: 'This is the GENESIS block',
-  hash: '0000000000',
-  lastHash: '0000000000',
+  difficulty: 2,
+  hash: '',
+  lastHash: 'GENESIS hash',
+  nonce: 1,
   timestamp: Date.now(),
 }
 

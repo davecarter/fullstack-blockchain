@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 
-const cryptoHash = (...inputData) => {
+const CryptoHash = (...inputData) => {
   // creates a hash object
   const hash = crypto.createHash('sha256')
 
@@ -12,4 +12,4 @@ const cryptoHash = (...inputData) => {
   return hash.digest('hex')
 }
 
-export { cryptoHash }
+export { CryptoHash }
